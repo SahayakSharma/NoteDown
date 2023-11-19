@@ -9,11 +9,12 @@ connecttoDB();
 export async function POST(request:NextRequest) {
     try{
         const reqbody=await request.json();
-        const {name,phone}=reqbody;
+        const {username,gmail,password}=reqbody;
 
         const newuser=new user({
-            name:name,
-            phone:phone
+            name:username,
+            gmail:gmail,
+            password:password,
         })
         const saveduser=await newuser.save();
         // console.log(saveduser)
@@ -22,8 +23,9 @@ export async function POST(request:NextRequest) {
 
         
         console.log("new user saved as "+saveduser)
+        
 
-        return NextResponse.json(user.find());
+        return NextResponse.json({});
 
     }
     catch(e){
