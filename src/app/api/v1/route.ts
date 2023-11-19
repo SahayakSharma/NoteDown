@@ -1,7 +1,7 @@
 
 
 import connecttoDB from "@/dbConnection/connect";
-import user from "@/model/userinfo";
+import {user} from "@/model/userinfo";
 import { NextRequest, NextResponse } from "next/server";
 
 connecttoDB();
@@ -25,6 +25,7 @@ export async function POST(request:NextRequest) {
         console.log("new user saved as "+saveduser)
         
 
+        // mongoose.connection.close();
         return NextResponse.json({});
 
     }
@@ -34,5 +35,18 @@ export async function POST(request:NextRequest) {
 
     }
     
+}
+
+export async function GET(request:NextRequest) {
+    try {
+        // const users=await founduser;
+        const users=await user.find({});
+        console.log(users);
+        return NextResponse.json(users);
+        
+    } catch (error:any) {
+        console.log(error.maessage);
+        
+    }
 }
 

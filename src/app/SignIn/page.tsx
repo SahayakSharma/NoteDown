@@ -1,8 +1,12 @@
 "use client"
 import connecttoDB from '@/dbConnection/connect';
 import React, { useEffect,useState } from 'react'
+import  {useRouter}  from 'next/navigation'
+import { set } from 'mongoose';
 
 const SignIn = () => {
+  const router = useRouter()
+  const[loading,setloading]=React.useState(false)
   const[username,setusername]=React.useState('');
   const[gmail,setgmail]=React.useState('');
   const[password,setpassword]=React.useState('');
@@ -14,6 +18,7 @@ const SignIn = () => {
         return
       }
       else{
+        setloading(true)
         await fetch('/api/v1', {
           method: 'POST',
           body: JSON.stringify({username:username,gmail:gmail,password:password}),
@@ -21,7 +26,9 @@ const SignIn = () => {
             'Content-Type': 'application/json',
           },
         })
-        alert('success')
+        setloading(false)
+        // alert('success')
+        router.push('/')
       }
     } catch (error : any) {
       console.log(error.message)
@@ -32,7 +39,7 @@ const SignIn = () => {
 
   return (
     <div className='w-[30%] h-[500px] mt-[100px] rounded-lg m-auto bg-white flex flex-col justify-around'>
-      <label htmlFor="" className='text-center text-black pt-[20px]'>Signup</label>
+      <label htmlFor="" className='text-center text-black pt-[20px]'>{loading ? "Processing":"Sign Up"}</label>
       <input type="text" className='w-[80%] m-auto h-[15%] outline-black text-black border-black border-[1px] rounded-md pl-[10px]'  placeholder='Username' value={username} onChange={(e)=>setusername(e.target.value)}/>
       <input type="text" className='w-[80%] m-auto h-[15%] outline-black text-black border-black border-[1px] rounded-md pl-[10px]'  placeholder='Gmail' value={gmail} onChange={(e)=>setgmail(e.target.value)}/>
       <input type="text" className='w-[80%] m-auto h-[15%] outline-black text-black border-black border-[1px] rounded-md pl-[10px]' placeholder='Password' value={password} onChange={(e)=>setpassword(e.target.value)}/>
