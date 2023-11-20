@@ -3,6 +3,7 @@ import connecttoDB from '@/dbConnection/connect';
 import React, { useEffect,useState } from 'react'
 import  {useRouter}  from 'next/navigation'
 import { set } from 'mongoose';
+import { isloggedin } from '@/helper/isloggedin';
 
 const SignIn = () => {
   const router = useRouter()
@@ -36,6 +37,11 @@ const SignIn = () => {
     }
 
   }
+  useEffect(()=>{
+    if(isloggedin){
+      router.push('/Diary')
+    }
+  },[])
 
   return (
     <div className='w-[30%] h-[500px] mt-[100px] rounded-lg m-auto bg-white flex flex-col justify-around'>

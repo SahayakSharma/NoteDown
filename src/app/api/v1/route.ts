@@ -41,7 +41,7 @@ export async function GET(request:NextRequest) {
     try {
         // const users=await founduser;
         const users=await User.find({});
-        console.log(users);
+        // console.log(users);
         return NextResponse.json(users);
         
     } catch (error:any) {

@@ -2,6 +2,11 @@
 import React from 'react';
 import { useState } from 'react';
 import  {useRouter}  from 'next/navigation'
+import { isloggedin } from '@/helper/isloggedin';
+import { useEffect } from 'react';
+import { changestatus } from '@/helper/isloggedin';
+
+
 export default function Home() {
   const router=useRouter();
   const[loading,setloading]=React.useState(false);
@@ -17,6 +22,7 @@ export default function Home() {
       const allusers=await response.json();
       console.log(allusers)
       await allusers.map((user:any)=>{
+        changestatus(true);
         if(user.name===username && user.password===password){
           setuserfound(true);
           setusername('');
@@ -30,6 +36,11 @@ export default function Home() {
     })
 
   }
+  useEffect(()=>{
+    if(isloggedin){
+      router.push('/Diary')
+    }
+  },[])
   return (
     <div className='w-[20%] h-[400px] bg-white rounded-lg m-auto mt-[160px] flex flex-col justify-around'>
       <label htmlFor="" className='text-center text-black pt-[20px]'>{loading?"Processing":"LogIn"}</label>

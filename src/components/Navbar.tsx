@@ -8,7 +8,7 @@ const Navbar = () => {
         <h2>HOME</h2>
         <h2 onClick={()=>{router.push('/SignIn')}}>SignIn</h2>
         <h2 onClick={()=>{router.push('/')}}>LogIn</h2>
-        <h2>Diary</h2>
+        <h2 >Diary</h2>
 
       
     </div>
@@ -16,3 +16,5 @@ const Navbar = () => {
 }
 
 export default Navbar
+
+
