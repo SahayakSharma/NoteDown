@@ -6,7 +6,6 @@ const userSchema=new mongoose.Schema({
     password : String,
 })
 
-const user=mongoose.models.users||mongoose.model('user_creds',userSchema);
-// export const founduser=user.find();
+export const User=mongoose.models.user_creds||mongoose.model('user_creds',userSchema);
 
-export default user;
+

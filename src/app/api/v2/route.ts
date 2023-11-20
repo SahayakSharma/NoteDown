@@ -1,6 +1,6 @@
 import connecttoDB from "@/dbConnection/connect";
 import { NextRequest,NextResponse } from "next/server";
-import user from "@/model/userinfo";
+import {user} from "@/model/userinfo";
 // import { founduser } from "@/model/userinfo";
 connecttoDB();
 export async function GET(request:NextRequest) {
